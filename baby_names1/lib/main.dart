@@ -47,20 +47,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
         //change the dummy snapshot to document
 
-        return _buildList(context, dummySnapshot);
+        return _buildList(context, snapshot.data.documents);
       },
     );
   }
 
-  Widget _buildList(BuildContext context, List<Map> snapshot) {
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
 
-  Widget _buildListItem(BuildContext context, Map data) {
-    final record = Record.fromMap(data);
+  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+    //chane from map to document snapshot
+    final record = Record.fromSnapshot(data);
 
     return Padding(
       key: ValueKey(record.name),
